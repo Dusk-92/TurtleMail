@@ -8,7 +8,7 @@ local m = TurtleMail
 local getn = table.getn
 local function pack( ... ) return arg end
 
-m.compat_version = "1.4.6-compat.1"
+m.compat_version = "1.4.6"
 
 local DEFAULT_SENT_FILTERS = {
   Money = 1,

@@ -2,8 +2,8 @@
 ## Interface: 11200
 ## Title: |cffabd473Turtle|cffffffffMail
 ## Author: shirsig/sica, Dusk-92 (compatibility fixes)
-## Version: 1.4.6-compat.1
-## Notes: Mailbox enhancement - Turtle WoW 1.18.x compatibility fixes
+## Version: 1.4.6
+## Notes: Mailbox enhancement - Turtle WoW 1.18.x compatibility
 ## SavedVariables: TurtleMail_AutoCompleteNames
 ## SavedVariablesPerCharacter: TurtleMail_To TurtleMail_Point TurtleMail_Log
 

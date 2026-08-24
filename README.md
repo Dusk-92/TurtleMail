@@ -1,8 +1,8 @@
 # TurtleMail - WoW 1.12 / Turtle WoW
 
-This fork keeps the original TurtleMail features while adding a small compatibility layer for **Turtle WoW 1.18.x / Octo**.
+This fork keeps the original TurtleMail features while adding a compatibility and safety layer for **Turtle WoW 1.18.x / Octo**.
 
-> Current test build: **1.4.6-compat.1**  
+> Stable release: **1.4.6**  
 > Based on upstream **sica42/TurtleMail 1.4.5**.  
 > The compatibility work is isolated in `TurtleMailFix.lua` so upstream changes remain easy to compare and merge.
 
@@ -26,7 +26,7 @@ Logging is disabled by default. Enable with `/tm log`.
 
 ## Turtle WoW compatibility fixes
 
-`1.4.6-compat.1` currently addresses:
+Version **1.4.6** addresses:
 
 - `MailHorizontalBarLeft` / `MailHorizontalBarRight` nil crashes.
 - Missing or malformed `TurtleMail_AutoCompleteNames` SavedVariables.
@@ -36,21 +36,15 @@ Logging is disabled by default. Enable with `/tm log`.
 - Stale AH/returned icons on empty inbox rows.
 - Fragile mailbox/package-frame lookups.
 - A calendar tooltip nil/stale-value edge case.
+- Several additional guards around mailbox UI replacements and malformed state.
 
-See [`AUDIT.md`](AUDIT.md) for the full audit, remaining architectural risks, and the in-game validation checklist.
+See [`AUDIT.md`](AUDIT.md) for the full audit and remaining architectural risks.
 
-## Test status
+## Validation status
 
-This is intentionally marked as a **test build** until it has been validated in-game on Turtle WoW 1.18.x. Core mail sending/opening behavior has not been deliberately redesigned; the patch focuses on compatibility and safety around the upstream implementation.
+Version **1.4.6** has been promoted to stable after in-game testing on Turtle WoW 1.18.x completed without Lua errors in the tested setup.
 
-Recommended checks after installing:
-
-1. Open/close the mailbox repeatedly.
-2. Test normal mail, item mail, gold, AH, returned mail, and COD.
-3. Test one-item and multi-item sends.
-4. Test recipient autocomplete.
-5. Test the sent/received log.
-6. If you use pfUI, test with its mailbox skin enabled and disabled.
+The patch intentionally keeps the original send/open workflow instead of redesigning it. Addons that heavily replace or re-parent the Blizzard mail UI can still create compatibility issues; known architectural risks are documented in `AUDIT.md`.
 
 ## Screenshots
 
