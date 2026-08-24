@@ -2,7 +2,7 @@
 
 Target: Turtle WoW 1.18.x / Octo client.
 
-## Fixed in 1.4.6-compat.1
+## Fixed in 1.4.6
 
 - **Horizontal mail bar crash:** the upstream code creates `MailHorizontalBarLeft/Right` and then assumes the textures are exported as globals. Some client/UI combinations return the textures without the expected global, causing `attempt to index field 'MailHorizontalBarLeft' (a nil value)`. The compatibility layer guarantees valid texture references before setup and updates.
 - **Autocomplete SavedVariables crash:** `TurtleMail_AutoCompleteNames` and its realm/faction table are used without schema validation. The patch initializes/repairs missing or malformed SavedVariables before `ADDON_LOADED`, `PLAYER_LOGIN`, slash commands, and autocomplete.
@@ -26,23 +26,16 @@ These are intentionally not rewritten in the compatibility layer because changin
 3. Several layouts rely on specific Blizzard frame names and region ordering. The compatibility layer protects the confirmed/high-risk cases, but a full mail-frame replacement can still be incompatible.
 4. The pfUI skin accesses pfUI internals (`MailFrame.backdrop`, `pfUI_config`, specific widget members). A future pfUI layout change can therefore break the skin even when core TurtleMail remains functional.
 5. Inbox polling is frame-count based (`200` OnUpdate ticks), so the interval changes with FPS. It is not a correctness bug but is less predictable than elapsed-time polling.
-6. The addon has no automated runtime test harness for Turtle WoW mail APIs; final validation still needs an in-game test with empty mail, item mail, gold, COD, AH mail, multi-attachment send, autocomplete, and (if used) pfUI.
+6. The addon has no automated runtime test harness for Turtle WoW mail APIs; future changes still need in-game validation with representative mail/send scenarios.
 
 ## Compatibility context
 
 The upstream repository already had a Turtle WoW 1.18.1 report where `MailFrame` became nil; that report was ultimately traced to MoveAnything. This reinforces that TurtleMail is sensitive to addons that replace or re-parent the mail UI.
 
-## Suggested in-game validation
+## Validation
 
-- Open and close the mailbox repeatedly.
-- Open a normal letter, item mail, gold mail, AH mail, and returned mail.
-- Confirm COD mail is skipped by Open All.
-- Send one item and then several items.
-- Send money and confirm the log records it.
-- Type a previously seen sender in the recipient field and confirm autocomplete.
-- Switch inbox pages and verify AH/returned icons do not remain on empty rows.
-- If pfUI is installed, test with its mailbox skin both enabled and disabled.
+The compatibility build was tested in-game on Turtle WoW 1.18.x and the reported setup produced no Lua errors after the fixes were applied. Because mailbox behavior can be affected by other UI addons, future changes should still be checked with normal mail, item mail, gold, COD, AH/returned mail, multi-attachment send, autocomplete, logging, and pfUI when applicable.
 
 ## Status
 
-`1.4.6-compat.1` is a **test build**, not a final release. The fixes are intentionally isolated in `TurtleMailFix.lua` so upstream code stays easy to compare and future upstream changes remain easier to merge.
+**1.4.6 is the current stable release.** The fixes remain isolated in `TurtleMailFix.lua` so upstream code stays easy to compare and future upstream changes remain easier to merge.
