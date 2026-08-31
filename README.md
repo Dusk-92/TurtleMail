@@ -1,53 +1,150 @@
-# TurtleMail - WoW 1.12 / Turtle WoW
+# 📬 TurtleMail — Turtle WoW
 
-This fork keeps the original TurtleMail features while adding a compatibility and safety layer for **Turtle WoW 1.18.x / Octo**.
+A lightweight mailbox enhancement for **World of Warcraft 1.12**, maintained for **Turtle WoW 1.18.x / Octo-like environments**.
 
-> Stable release: **1.4.6**  
-> Based on upstream **sica42/TurtleMail 1.4.5**.  
-> The compatibility work is isolated in `TurtleMailFix.lua` so upstream changes remain easy to compare and merge.
+TurtleMail improves the Vanilla mail interface with faster mail handling, multiple attachments, recipient autocomplete, mail logging and useful Auction House / returned-mail indicators.
 
-## Features
+> This fork keeps the original TurtleMail workflow while adding a compatibility and safety layer for modern Turtle WoW 1.12 environments.
 
-- **Automatically opens mail, very rapidly**
-- **Mails multiple items at once, very rapidly**
-- **Autocompletes recipient names**
-- **Icons to show if mail was returned or is from AH**
-- **Shows collected gold from opened mails**
-- **Apply COD to 1st or all mails**
-- **Logging of all sent and received mails**
+## 📦 Installation
 
-**\<Right Click>** on inbox items to loot the gold, loot the item and destroy the letter, in that order, if any.<br/>
-**\<Right Click>** or **\<Left Drag>** to add inventory items to the attachments.<br/>
-**\<Right Click>** to add inventory items to the trade frame.
+1. Download the addon.
+2. Make sure the addon folder is named `TurtleMail`.
+3. Copy it to:
 
-Note that COD is always ignored when opening, both automatically as well as by **\<Right Click>**.
+   `World of Warcraft\Interface\AddOns\TurtleMail`
 
-Logging is disabled by default. Enable with `/tm log`.
+4. Restart the game.
+5. Make sure **TurtleMail** is enabled in the AddOns menu.
 
-## Turtle WoW compatibility fixes
+No additional addon is required for the core functionality.
 
-Version **1.4.6** addresses:
+## ✨ Features
 
-- `MailHorizontalBarLeft` / `MailHorizontalBarRight` nil crashes.
-- Missing or malformed `TurtleMail_AutoCompleteNames` SavedVariables.
-- Broken learning of sender names for autocomplete.
-- Sent-money logging not being recorded correctly.
-- Inbox index/COD nil safety during automatic opening.
-- Stale AH/returned icons on empty inbox rows.
-- Fragile mailbox/package-frame lookups.
-- A calendar tooltip nil/stale-value edge case.
-- Several additional guards around mailbox UI replacements and malformed state.
+- Quickly open multiple mails.
+- Quickly send multiple item attachments.
+- Recipient name autocomplete.
+- Automatically learns names from received mail.
+- Auction House mail indicators.
+- Returned-mail indicators.
+- Displays the amount of gold collected while opening mail.
+- Apply **Cash on Delivery (COD)** to the first attachment or all outgoing mails.
+- Optional logging for sent and received mail.
+- Dedicated mail log interface.
+- Multiple localization support.
+- Vanilla-style mailbox integration.
 
-See [`AUDIT.md`](AUDIT.md) for the full audit and remaining architectural risks.
+## 🖱️ Mail controls
 
-## Validation status
+### Inbox
 
-Version **1.4.6** has been promoted to stable after in-game testing on Turtle WoW 1.18.x completed without Lua errors in the tested setup.
+**Right-click** an inbox entry to automatically:
 
-The patch intentionally keeps the original send/open workflow instead of redesigning it. Addons that heavily replace or re-parent the Blizzard mail UI can still create compatibility issues; known architectural risks are documented in `AUDIT.md`.
+1. Loot attached gold.
+2. Loot the attached item.
+3. Delete the empty letter.
 
-## Screenshots
+COD mail is intentionally ignored by automatic opening and right-click collection.
+
+### Attachments
+
+- **Right-click** an inventory item to add it to an outgoing mail.
+- **Left-drag** an inventory item to add it to the attachment list.
+- **Right-click** an inventory item to add it to the trade frame.
+
+## 📝 Mail logging
+
+Mail logging is disabled by default.
+
+Enable or disable it with:
+
+`/tm log`
+
+When enabled, TurtleMail records sent and received mail information in its dedicated log.
+
+## ⚙️ Commands
+
+| Command | Description |
+|---|---|
+| `/tm` | Display TurtleMail help |
+| `/turtlemail` | Long version of `/tm` |
+| `/tm help` | Display TurtleMail commands |
+| `/tm log` | Toggle mail logging |
+| `/tm clear sent` | Clear the sent-mail log |
+| `/tm clear received` | Clear the received-mail log |
+| `/tm clear names` | Clear saved autocomplete recipient names |
+
+## 🔧 Turtle WoW compatibility
+
+Version **1.4.6** adds a compatibility and safety layer for Turtle WoW 1.18.x environments.
+
+The compatibility work is isolated in `TurtleMailFix.lua` so the original TurtleMail code remains easier to compare with upstream versions.
+
+### Main fixes
+
+- Fixed `MailHorizontalBarLeft` / `MailHorizontalBarRight` nil crashes.
+- Added validation and repair for malformed autocomplete SavedVariables.
+- Fixed learning sender names for recipient autocomplete.
+- Fixed sent-money logging.
+- Added safer inbox index and COD handling.
+- Prevented stale Auction House and returned-mail icons.
+- Added guards for missing or replaced mailbox frames.
+- Improved package-frame safety.
+- Added safer handling for malformed log entries.
+- Fixed calendar tooltip nil/stale-value cases.
+- Rebound the safer `OnUpdate` handler correctly after loading the compatibility layer.
+
+The complete technical audit is available in [`AUDIT.md`](AUDIT.md).
+
+## 🛡️ Compatibility notes
+
+TurtleMail directly interacts with several Blizzard mailbox functions and frames.
+
+Most standard Turtle WoW setups should work normally, but addons that heavily replace or re-parent the default mail interface may conflict with TurtleMail.
+
+The compatibility layer intentionally avoids rewriting the original sending and receiving workflow to preserve the behavior of the upstream addon.
+
+## 🌍 Localization
+
+TurtleMail includes localization support for:
+
+- English
+- French
+- German
+- Spanish
+- Russian
+
+## 🔧 Compatibility
+
+- World of Warcraft 1.12
+- Interface version `11200`
+- Turtle WoW 1.18.x
+- Octo-like Vanilla environments
+- Vanilla Blizzard mailbox UI
+- Optional pfUI integration
+
+## 📜 Version
+
+Current stable version:
+
+**1.4.6**
+
+Based on upstream **TurtleMail 1.4.5**.
+
+Version 1.4.6 has been tested in-game on Turtle WoW 1.18.x without Lua errors in the tested setup.
+
+## 🖼️ Screenshots
 
 ![TurtleMail](https://i.imgur.com/H0MUmXd.png)
 
 ![TurtleMail](https://i.imgur.com/LM7tRcx.png)
+
+## 🙏 Credits
+
+Original TurtleMail addon by **shirsig / sica**.
+
+Upstream maintenance by **sica42**.
+
+Turtle WoW compatibility fixes and additional maintenance by **Dusk-92**.
+
+This fork aims to preserve the original TurtleMail experience while improving compatibility and stability on modern Vanilla server environments.
