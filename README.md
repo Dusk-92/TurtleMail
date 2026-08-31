@@ -139,6 +139,31 @@ Version 1.4.6 has been tested in-game on Turtle WoW 1.18.x without Lua errors in
 
 ![TurtleMail](https://i.imgur.com/LM7tRcx.png)
 
+## 📜 Project identity & licensing
+
+TurtleMail is an independent community-maintained fork with this known source
+chain:
+
+- [shirsig/Mail](https://github.com/shirsig/Mail)
+- [sica42/TurtleMail](https://github.com/sica42/TurtleMail)
+- this maintained fork
+
+No explicit project-wide license was identified in the two known upstream
+repositories during the provenance audit, so this fork does **not** claim to
+relicense inherited code.
+
+Compatibility with **World of Warcraft**, **Turtle WoW / Octo-like
+environments**, or **pfUI** does not imply affiliation, endorsement, or
+sponsorship.
+
+For details, see:
+
+- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+- [PROJECT_IDENTITY.md](PROJECT_IDENTITY.md)
+- [Docs/CODE_PROVENANCE.md](Docs/CODE_PROVENANCE.md)
+- [Docs/ASSET_PROVENANCE.md](Docs/ASSET_PROVENANCE.md)
+- [LICENSES/](LICENSES/)
+
 ## 🙏 Credits
 
 Original TurtleMail addon by **shirsig / sica**.
