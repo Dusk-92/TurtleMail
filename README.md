@@ -76,7 +76,7 @@ When enabled, TurtleMail records sent and received mail information in its dedic
 
 ## 🔧 Turtle WoW compatibility
 
-Version **1.4.6** adds a compatibility and safety layer for Turtle WoW 1.18.x environments.
+Version **1.4.7** extends the compatibility and safety layer for Turtle WoW 1.18.x environments.
 
 The compatibility work is isolated in `TurtleMailFix.lua` so the original TurtleMail code remains easier to compare with upstream versions.
 
@@ -85,6 +85,7 @@ The compatibility work is isolated in `TurtleMailFix.lua` so the original Turtle
 - Fixed `MailHorizontalBarLeft` / `MailHorizontalBarRight` nil crashes.
 - Added validation and repair for malformed autocomplete SavedVariables.
 - Fixed learning sender names for recipient autocomplete.
+- Fixed persistent autocomplete timestamp aging across client restarts.
 - Fixed sent-money logging.
 - Added safer inbox index and COD handling.
 - Prevented stale Auction House and returned-mail icons.
@@ -93,6 +94,7 @@ The compatibility work is isolated in `TurtleMailFix.lua` so the original Turtle
 - Added safer handling for malformed log entries.
 - Fixed calendar tooltip nil/stale-value cases.
 - Rebound the safer `OnUpdate` handler correctly after loading the compatibility layer.
+- Prevented the send queue from remaining stuck when an attachment becomes unavailable during sending.
 
 The complete technical audit is available in [`AUDIT.md`](AUDIT.md).
 
@@ -102,7 +104,7 @@ TurtleMail directly interacts with several Blizzard mailbox functions and frames
 
 Most standard Turtle WoW setups should work normally, but addons that heavily replace or re-parent the default mail interface may conflict with TurtleMail.
 
-The compatibility layer intentionally avoids rewriting the original sending and receiving workflow to preserve the behavior of the upstream addon.
+The compatibility layer keeps the upstream workflow intact where possible and only replaces fragile paths when needed for compatibility or safety.
 
 ## 🌍 Localization
 
@@ -127,11 +129,11 @@ TurtleMail includes localization support for:
 
 Current stable version:
 
-**1.4.6**
+**1.4.7**
 
 Based on upstream **TurtleMail 1.4.5**.
 
-Version 1.4.6 has been tested in-game on Turtle WoW 1.18.x without Lua errors in the tested setup.
+Version 1.4.7 has been validated in-game on Turtle WoW 1.18.x without Lua errors in the tested setup.
 
 ## 🖼️ Screenshots
 
